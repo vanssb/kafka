@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "title": "MessageRs",
+  "type": "object",
+  "properties": {
+    "messageText": {
+      "description": "The unique identifier for a product",
+      "type": "string"
+    }
+  },
+  "required": [ ]
+}

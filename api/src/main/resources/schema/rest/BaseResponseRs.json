@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "title": "BaseResponse",
+  "type": "object",
+  "properties": {
+    "success": {
+      "description": "The unique identifier for a product",
+      "type": "boolean"
+    },
+    "body": {
+      "description": "The unique identifier for a product",
+      "type": "object"
+    },
+    "error": {
+      "description": "The unique identifier for a product",
+      "type": "string"
+    },
+    "error": {
+      "description": "The unique identifier for a product",
+      "type": "string"
+    }
+  },
+  "required": [ "success" ]
+}
