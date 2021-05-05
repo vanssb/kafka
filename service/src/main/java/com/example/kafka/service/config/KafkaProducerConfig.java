@@ -1,5 +1,6 @@
 package com.example.kafka.service.config;
 
+import com.example.types.kafka.KafkaMessageRs;
 import com.example.types.kafka.KafkaMessageRq;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -50,7 +51,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, KafkaMessageRq> producerMockFactory() {
+    public ProducerFactory<String, KafkaMessageRs> producerMockFactory() {
         return new DefaultKafkaProducerFactory<>(producerMockConfigs());
     }
 
@@ -62,8 +63,8 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, KafkaMessageRq> kafkaMockTemplate() {
-        KafkaTemplate<String, KafkaMessageRq> template = new KafkaTemplate<>(producerMockFactory());
+    public KafkaTemplate<String, KafkaMessageRs> kafkaMockTemplate() {
+        KafkaTemplate<String, KafkaMessageRs> template = new KafkaTemplate<>(producerMockFactory());
         template.setMessageConverter(new StringJsonMessageConverter());
         return template;
     }
