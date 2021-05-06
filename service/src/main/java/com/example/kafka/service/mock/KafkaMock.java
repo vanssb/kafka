@@ -15,18 +15,18 @@ public class KafkaMock {
     @Value("${kafka.response.topic}")
     private String responseTopic;
 
-    private final KafkaTemplate<String, KafkaMessageRs> kafkaMockTemplace;
+    private final KafkaTemplate<String, KafkaMessageRs> kafkaMockTemplate;
 
-    public KafkaMock(KafkaTemplate<String, KafkaMessageRs> kafkaMockTemplace) {
-        this.kafkaMockTemplace = kafkaMockTemplace;
+    public KafkaMock(KafkaTemplate<String, KafkaMessageRs> kafkaMockTemplate) {
+        this.kafkaMockTemplate = kafkaMockTemplate;
     }
 
     @KafkaListener(topics = "#{'${kafka.request.topic}'}", containerFactory = "singleFactory", groupId = "#{T(java.util.UUID).randomUUID().toString()}")
-    private void responseListener(KafkaMessageRq request) throws Exception{
+    private void responseListener(KafkaMessageRq request){
         log.info("Message in request topic: " + request);
         KafkaMessageRs response = new KafkaMessageRs();
         response.setRqUid(request.getRqUid());
         response.setMessageText("get your message, guy");
-        kafkaMockTemplace.send(responseTopic, request.getRqUid(), response);
+        kafkaMockTemplate.send(responseTopic, request.getRqUid(), response);
     }
 }

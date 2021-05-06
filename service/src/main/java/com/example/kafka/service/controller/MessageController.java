@@ -25,7 +25,6 @@ public class MessageController {
         Body body = new Body();
         body.setAdditionalProperty ("messageText", kafkaResponse.getMessageText ());
         response.setBody(body);
-        //response.setBody(kafkaResponse.getMessageText());
         return response;
     }
 }

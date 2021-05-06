@@ -1,7 +1,6 @@
 package com.example.kafka.service.config;
 
 import com.example.types.kafka.KafkaMessageRs;
-import com.example.types.kafka.KafkaMessageRq;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,33 +16,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaProducerConfig {
-
+public class KafkaProducerMockConfig {
     @Value("${kafka.server}")
     private String kafkaServer;
 
-    @Value("${kafka.producer.id}")
-    private String kafkaProducerId;
-
     @Bean
-    public Map<String, Object> producerConfigs() {
-        Map<String, Object> props = new HashMap<>();
+    public Map<String, Object> producerMockConfigs() {
+        Map<String, Object> props = new HashMap<> ();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        props.put(ProducerConfig.CLIENT_ID_CONFIG, kafkaProducerId);
+        props.put(ProducerConfig.CLIENT_ID_CONFIG, "mockProducer");
         return props;
     }
 
     @Bean
-    public ProducerFactory<String, KafkaMessageRq> producerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerConfigs());
+    public ProducerFactory<String, KafkaMessageRs> producerMockFactory() {
+        return new DefaultKafkaProducerFactory<> (producerMockConfigs());
     }
 
     @Bean
-    public KafkaTemplate<String, KafkaMessageRq> kafkaMessageTemplate() {
-        KafkaTemplate<String, KafkaMessageRq> template = new KafkaTemplate<>(producerFactory());
-        template.setMessageConverter(new StringJsonMessageConverter());
+    public KafkaTemplate<String, KafkaMessageRs> kafkaMockTemplate() {
+        KafkaTemplate<String, KafkaMessageRs> template = new KafkaTemplate<>(producerMockFactory());
+        template.setMessageConverter(new StringJsonMessageConverter ());
         return template;
     }
 }
