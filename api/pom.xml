@@ -9,6 +9,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>api</artifactId>
+    <properties>
+        <java.version>8</java.version>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -18,7 +21,7 @@
                 <configuration>
                     <sourceDirectory>${basedir}/src/main/resources/schema</sourceDirectory>
                     <targetPackage>com.example.types</targetPackage>
-                    <annotationStyle>jackson2</annotationStyle>
+                    <annotationStyle>jackson</annotationStyle>
                 </configuration>
                 <executions>
                     <execution>

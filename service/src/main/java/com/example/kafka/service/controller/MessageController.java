@@ -3,6 +3,7 @@ package com.example.kafka.service.controller;
 import com.example.kafka.service.service.KafkaService;
 import com.example.types.kafka.KafkaMessageRs;
 import com.example.types.rest.BaseResponseRs;
+import com.example.types.rest.Body;
 import com.example.types.rest.MessageRq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,9 @@ public class MessageController {
         KafkaMessageRs kafkaResponse = kafkaService.send(request.getMessageText());
         BaseResponseRs response = new BaseResponseRs();
         response.setSuccess(true);
+        Body body = new Body();
+        body.setAdditionalProperty ("messageText", kafkaResponse.getMessageText ());
+        response.setBody(body);
         //response.setBody(kafkaResponse.getMessageText());
         return response;
     }

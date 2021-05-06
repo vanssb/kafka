@@ -94,6 +94,11 @@
                     <to>
                         <image>${image.path}</image>
                     </to>
+                     <container>
+                         <ports>
+                             <port>9997</port>
+                         </ports>
+                     </container>
                  </configuration>
             </plugin>
         </plugins>
